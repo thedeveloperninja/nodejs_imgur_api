@@ -1,13 +1,18 @@
 const download = require('image-downloader');
 const action = require('./actions');
+const uuid = require('uuid/v1')
 
-//upload pictures
+//upload pictures to imgur
 function upload_pics(req,res){
 
-  res.send({
-    "jobid":"6723828382828"
-  });
   var url = req.body.urls;
+  //generate a unique job id
+  var id = uuid();
+  //send a unique job id as response
+  res.send({
+    "jobid":uuid()
+  });
+  //download each image and upload it in imgur
   for (var link of url){
     action.get_image(link,'./images/');
   }
@@ -25,9 +30,6 @@ function job_status(req,res){
   console.log(id);
   res.end();
 }
-
-
-
 
 // exporting the functions
 module.exports = {

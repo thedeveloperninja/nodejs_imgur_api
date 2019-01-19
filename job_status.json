@@ -1,0 +1,17 @@
+{
+  "jobs":{
+
+    "jobid":{
+      "id":"",
+      "created":"",
+      "finished":"",
+      "status":"",
+      "uploaded":{
+        "pending":[],
+        "completed":[],
+        "failed":[]
+      }
+    }
+
+  }
+}
