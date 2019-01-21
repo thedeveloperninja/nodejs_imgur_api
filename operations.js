@@ -21,7 +21,7 @@ function job_status(req,res){
 
 function list_url(req,res){
 
-  res.send(uploaded);
+  res.json(uploaded);
   res.end();
 }
 

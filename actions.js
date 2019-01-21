@@ -16,7 +16,7 @@ async function download_upload(urls,path,index){
 async function download_img(urls,path,index){
 
   var option = {url: urls[index], dest: path};
-await download.image(option)
+  await download.image(option)
   .then(
     function(){
       console.log("image downloaded");
@@ -32,7 +32,7 @@ await download.image(option)
 //function to upload a image in imgur
 async function upload_img(path){
 
-await  imgur.uploadFile(path)
+  await imgur.uploadFile(path)
   .then(
     function(json){
       console.log(json.data.link);
