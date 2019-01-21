@@ -1,36 +1,50 @@
 const download = require('image-downloader');
-const imgur = require("imgur");
+const imgur = require('imgur');
+imgur.setClientId('c84e5ad7dfa88ba'); //set api client
 
-//function to download a image
-function getimage(url,path){
+async function download_upload(urls,path,index){
 
-  var options = {
-    url: url,
-    dest: path
+  await download_img(urls,path,index);
+  await upload_img(path);
+  index = index + 1;
+  if( index < urls.length){
+    download_upload(urls,path,index);
   }
-  download.image(options)
-  .catch(function(err){
-    console.log("invalid link : " + options.url);
-  });
 }
 
-//function to upload to imgur
-function upload_img(path){
+//function to download a image from a link
+async function download_img(urls,path,index){
 
-  imgur.setClientId('c84e5ad7dfa88ba'); //replace with your own client id
-  imgur.uploadFile(path)
-      .then(function (json) {
-          var status = json.status;
-          var link = json.data.link;
-          var success = json.success;
-      })
-      .catch(function (err) {
-          console.error(err.message);
-      });
+  var option = {url: urls[index], dest: path};
+await download.image(option)
+  .then(
+    function(){
+      console.log("image downloaded");
+    }
+  )
+  .catch(
+      function(err){
+        console.error(err.message);
+      }
+    );
 }
 
-//export the functions
+//function to upload a image in imgur
+async function upload_img(path){
+
+await  imgur.uploadFile(path)
+  .then(
+    function(json){
+      console.log(json.data.link);
+    })
+    .catch(
+      function(err){
+        console.error(err.message);
+      }
+    );
+}
+
+//export the function
 module.exports = {
-  get_image : getimage,
-  upload_img : upload_img
+  download_upload : download_upload
 }

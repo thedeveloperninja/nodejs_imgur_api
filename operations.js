@@ -1,33 +1,27 @@
-const download = require('image-downloader');
 const action = require('./actions');
 const uuid = require('uuid/v1')
+var datastore = require('./data_file.json');
+var uploaded = require('./uploaded.json');
 
-//upload pictures to imgur
 function upload_pics(req,res){
 
-  var url = req.body.urls;
-  //generate a unique job id
+  var urls = req.body.urls;
   var id = uuid();
-  //send a unique job id as response
-  res.send({
-    "jobid":uuid()
-  });
-  //download each image and upload it in imgur
-  for (var link of url){
-    action.get_image(link,'./images/');
-  }
+  var path = './images/'+id+'img.jpg';
+  action.download_upload(urls,path,0);
+  res.send({"jobid":id});
 }
 
-//list all the uploaded urls
-function list_url(req,res){
-
-}
-
-//get the status of a job
 function job_status(req,res){
 
   var id = req.params.jobid;
   console.log(id);
+  res.end();
+}
+
+function list_url(req,res){
+
+  res.send(uploaded);
   res.end();
 }
 
