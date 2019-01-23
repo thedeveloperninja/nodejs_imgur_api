@@ -12,4 +12,3 @@ router.get('/v1/images/upload/:jobid', operation.job_status);
 router.post('/v1/images/upload', operation.upload_pics);
 
 module.exports = router;
-m
