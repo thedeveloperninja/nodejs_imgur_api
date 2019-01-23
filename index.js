@@ -14,5 +14,5 @@ app.use(routes);
 //listen on port 8000
 app.listen(process.env.port || 8000, function() {
 
-  console.log('listening on port 8000');
+  console.log('listening');
 });
